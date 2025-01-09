@@ -20,13 +20,8 @@
             </div>
 
             <div class="form-group mb-3">
-                <label class="font-weight-normal" for="name">Name</label>
-                <input id="name" type="text" class="form-control" name="name" placeholder="Please insert your name">
-            </div>
-            
-            <div class="form-group mb-3">
-                <label class="font-weight-normal" for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email" placeholder="Please insert your email">
+                <label class="font-weight-normal" for="Username">Name</label>
+                <input id="Username" type="text" class="form-control" name="username" placeholder="Please insert your name">
             </div>
 
             <div class="form-group mb-3">
@@ -35,6 +30,8 @@
             </div>
 
             <button class="btn btn-submit btn-primary w-100 rounded mt-3" type="submit">Submit</button>
+            <p class="mt-3 text-center">Already have an account? <a href="<?= base_url('//auth/login') ?>">Login</a> here</p>
+
         </div>
 
     </form>

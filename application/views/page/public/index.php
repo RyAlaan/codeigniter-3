@@ -10,20 +10,19 @@
           <li class="nav-item active">
             <a class="nav-link" href="<?= base_url('') ?>">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Link</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="">News</a>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> -->
+          <?php if($this->session->has_userdata('id')) : ?>
+            <li class="nav-item active">
+              <a class="nav-link" href="<?= base_url('//dashboard') ?>">Dashboard</a>
+            </li>
+          <?php endif ?>
+          <?php if($this->session->has_userdata('id')) : ?>
+            <li class="nav-item active">
+              <a class="nav-link" href="<?= base_url('//registrasi') ?>">Registrasi</a>
+            </li>
+          <?php endif ?>
         </ul>
 
         <form class="form-inline my-2 my-lg-0">
@@ -31,11 +30,21 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
 
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('index.php/auth/login') ?>">Login</a>
-          </li>
-        </ul>
+        <?php if ($this->session->has_userdata('id')): ?>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="<?= base_url('/AuthController/handleLogout') ?>">Logout</a>
+            </li>
+          </ul>
+        <?php else: ?>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="<?= base_url('/auth/login') ?>">Login</a>
+            </li>
+          </ul>
+        <?php endif; ?>
       </div>
     </nav>
+
+
 </div>

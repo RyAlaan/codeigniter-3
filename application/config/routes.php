@@ -56,4 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['auth/register'] = 'AuthController/register';
 $route['auth/login'] = 'AuthController/login';
-$route['dashboard'] = 'DashboarController/index';
+$route['dashboard'] = 'DashboardController/index';
+$route['registrasi'] = 'RegisterController/create';
+$route['dashboard/data-pendaftar'] = 'RegisterController/index';
