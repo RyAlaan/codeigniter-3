@@ -15,17 +15,12 @@ class Model extends CI_Model {
     }
     
     // get all data
-    public function get_all($table){
-        return $this->db->get($table);
-    }
-
-    // paginate data
-    public function paginate($table, $currPage, $limit){
-        return $this->db->paginate()
+    public function get_all($table, $offset = null, $limit = null) {
+        return $this->db->get($table, $offset, $limit);
     }
     
     // get by id
-    public function get_by_id($table, $id){
+    public function get_by_id($table, $id, $data){
         return $this->db->from($table)->where($id, $data);
     }
 

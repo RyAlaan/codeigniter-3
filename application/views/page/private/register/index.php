@@ -231,7 +231,7 @@
                             </div><!-- /.card-header -->
                             <div class="card-body">
                                 <div class="tab-content p-0">
-                                    
+									<p>test</p>
                                 </div>
                             </div><!-- /.card-body -->
                         </div>

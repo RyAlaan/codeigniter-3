@@ -6,6 +6,8 @@ class RegisterController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->library('pagination');
     }
     
     public function index(){
@@ -13,10 +15,20 @@ class RegisterController extends CI_Controller {
             redirect(base_url('/'));
         }
 
-        $data['bidang_lombas'] = $this->model->get_all('bidang_lombas')->result();
+        // $currPage = 1;
+        // $perPage = 15;
+
+        // $data['bidang_lombas'] = $this->model->get_all('bidang_lombas', $perPage, $currPage);
+        // $data['bidang_lombasCount'] = $this->model->count('bidang_lombas');
+
+        // $config['base_url'] = base_url('/dashboard/registrasi');
+        // $config['total_rows'] = $data['bidang_lombasCount'];
+        // $config['per_page'] = $perPage;
+
+        // $this->pagination->initialize($config);
 
         $this->load->view('layout/user/header');
-        $this->load->view('page/private/register/index', $data);
+        $this->load->view('page/private/register/index');
         $this->load->view('layout/user/footer');
     }
 
@@ -25,7 +37,7 @@ class RegisterController extends CI_Controller {
             redirect(base_url('/'));
         }
 
-        $data['pesertas'] = $this->model->paginate('registrations', '1', '25');
+        $data['bidang_lombas']= $this->model->get_all('bidang_lombas')->result(); 
 
         $this->load->view('layout/user/header');
         $this->load->view('page/private/register/create', $data);
@@ -54,7 +66,7 @@ class RegisterController extends CI_Controller {
         $this->form_validation->set_rules('tempat_lahir_guru', 'Tempat lahir guru', 'required');
         $this->form_validation->set_rules('tgl_lahir_guru', 'Tanggal lahir guru', 'required');
         $this->form_validation->set_rules('no_hp_guru', 'Nomor handphone guru', 'required|is_unique[registrations.no_hp_guru]');
-        $this->form_validation->set_rules('file_bukti', 'File bukti', 'required|mime_in[file_bukti,application/pdf]');
+        // $this->form_validation->set_rules('file_bukti', 'File bukti', 'required|mime_in[file_bukti,application/pdf]');
     
         if (!$this->form_validation->run()) {
             $this->session->set_flashdata('error', validation_errors());
@@ -78,15 +90,13 @@ class RegisterController extends CI_Controller {
         $no_hp_guru = $this->input->post('no_hp_guru');
     
         // File upload setup
-        $config['upload_path'] = base_url() .'/assets/uploads/';
+        $config['upload_path'] = 'assets/uploads/';
         $config['allowed_types'] = 'pdf';
         $config['max_width'] = 0;
         $config['max_height'] = 0;
         $config['max_size'] = 2048;
         $config['encrypt_name'] = TRUE;
 
-    
-        $this->load->library('upload', $config);
         $this->upload->initialize($config);
     
         if (!$this->upload->do_upload('file_bukti')) {
@@ -115,8 +125,7 @@ class RegisterController extends CI_Controller {
             'file_bukti' => $uploaded_data['file_name']
         ];
     
-        $this->load->model('Registration_model');
-        $registration = $this->Registration_model->insert('registrations', $data);
+        $registration = $this->model->insert('registrations', $data);
     
         if (!$registration) {
             $this->session->set_flashdata('error', 'An error occurred during registration. Please try again.');
