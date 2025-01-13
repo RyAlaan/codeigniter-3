@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
-	<a href="<?= base_url('/index.php') ?>" class="brand-link">
+	<a href="<?= base_url('/') ?>" class="brand-link">
 		<img
 			src="<?= base_url('assets/adminlte/') ?>dist/img/AdminLTELogo.png"
 			alt="AdminLTE Logo"

@@ -59,3 +59,4 @@ $route['auth/login'] = 'AuthController/login';
 $route['dashboard'] = 'DashboardController/index';
 $route['registrasi'] = 'RegisterController/create';
 $route['dashboard/data-pendaftar'] = 'RegisterController/index';
+$route['dashboard/data-pendaftar/edit/(:num)'] = 'RegisterController/update/$1';

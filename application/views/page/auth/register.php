@@ -3,17 +3,18 @@
 
         <!-- input method -->
         <input type="text" name="_method" value="POST" hidden>
-
-        <!-- message -->
-        <?php if ($this->session->flashdata('error')) : ?>
-            <div class="alert alert-danger">
-                <div class="p-3 bg-danger rounded">
-                    <p class=""><?= $this->session->flashdata("error") ?></p>
-                </div>
-            </div>
-        <?php endif ?>
-
+        
         <div class="w-50">
+    
+            <!-- message -->
+            <?php if ($this->session->flashdata('error')) : ?>
+                <div class="alert alert-danger">
+                    <div class="bg-danger rounded">
+                        <p class=""><?= $this->session->flashdata("error") ?></p>
+                    </div>
+                </div>
+            <?php endif ?>
+
             <div class="mb-3">
                 <p class="mb-0 text-muted">Hello there!👋</p>
                 <h4 class="mb-0 font-weight-bold">Let's create your account</h4>

@@ -26,11 +26,12 @@ class AuthController extends CI_Controller {
         }
         
         // validate data
-        $this->form_validation->set_rules('name', 'Name', 'required|max_lenght[50]|is_unique[users.username]', ['is_unique' => 'This username already added.']);
+        $this->form_validation->set_rules('username', 'Username', 'required|max_length[50]|is_unique[users.username]', ['is_unique' => 'This username already added.']);
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
         
         if (!$this->form_validation->run()){
-            redirect(base_url('//auth/register'));
+            $this->session->set_flashdata('error', validation_errors());
+            redirect(base_url('/auth/register'));
         }
         
         // input variable
@@ -50,7 +51,7 @@ class AuthController extends CI_Controller {
         
         // return
         $this->session->set_flashdata('success', 'Your data has been successfully added, please login');
-        redirect(base_url('//auth/login'));
+        redirect(base_url('/auth/login'));
     }
     
     public function login(){
@@ -100,6 +101,7 @@ class AuthController extends CI_Controller {
         $this->session->set_userdata('id', $user['id_user']);
          
         // redirect
+        $this->session->set_flashdata('success', 'login success');
         redirect(base_url('/'));
     }
     
