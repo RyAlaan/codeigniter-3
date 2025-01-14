@@ -261,7 +261,10 @@
 																<div class="dropdown-menu" aria-labelledby="actionDropdown">
 																	<a class="text-dark dropdown-item" href="<?= base_url('/dashboard/data-pendaftar/' . $data->id_reg) ?>">Detail</a>
 																	<a class="text-dark dropdown-item" href="<?= base_url('/dashboard/data-pendaftar/edit/' . $data->id_reg ) ?>">Edit</a>
-																	<a class="text-dark dropdown-item" href="<?= base_url('/RegisterController/handleAccept/' . $data->id_reg) ?>">Konfirmasi</a>
+																	<form action="<?= base_url('/RegisterController/confirm/' . $data->id_reg) ?>" method="post">
+																		<input type="text" name="_method" value="POST" hidden>
+																		<button type="submit" class="btn">Confirm</button>
+																	</form>
 																	<form action="<?= base_url('/RegisterController/delete/' . $data->id_reg) ?>" method="post">
 																		<input type="text" name="_method" value="DELETE" hidden>
 																		<button type="submit" class="btn">Delete</button>

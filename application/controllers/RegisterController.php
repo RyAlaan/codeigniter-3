@@ -265,6 +265,32 @@ class RegisterController extends CI_Controller {
         redirect('/dashboard/data-pendaftar');
     }
 
+    public function confirm($id) {
+        if ($this->input->post("_method") !== "POST" || $this->model->current_user()->status !== '2') {
+            $this->session->set_flashdata("error", "cannot handle method");
+            redirect('/');
+        }
+
+        // check is data exists
+        $data = $this->model->where('registrations', 'id_reg', $id)->get()->result_array();
+        if (!$data) {
+            $this->session->set_flashdata("error", "cannot find data");
+            redirect('/dashboard/data-pendaftar');
+        }
+
+        // update data
+        $data = ['validasi' => 2];
+        $updated = $this->model->update('registrations', $id, 'id_reg', $data);
+        if (!$updated) {
+            $this->session->set_flashdata('error', 'cannot update data, please try again later');
+            redirect('/dashboard/data-pendaftar');
+        }
+
+        // redirect
+        $this->session->set_flashdata("success", "data confirmed successfully");
+        redirect('/dashboard/data-pendaftar');  
+    }
+
     public function generatePDF(){
 
     }
